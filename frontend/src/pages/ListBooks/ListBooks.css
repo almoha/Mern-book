@@ -1,0 +1,22 @@
+.wrapper {
+  padding: 50px;
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  text-align: center;
+  /* justify-content: flex-start; */
+}
+
+.wrapper div {
+  background-color: rgba(51, 53, 73, 0.829);
+  color: whitesmoke;
+
+  width: 15%;
+  border: solid 1px;
+  padding: 1em;
+}
+
+.btn {
+  margin-left: 10px;
+  cursor: pointer;
+}
