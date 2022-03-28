@@ -15,7 +15,7 @@ const UpdateBook = () => {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState(book.title);
-  const [resume, setResume] = useState(book.resume);
+  const [description, setdescription] = useState(book.description);
   const [author, setAuthor] = useState(book.author);
 
   const handleSubmitButton = (id) => {
@@ -23,7 +23,7 @@ const UpdateBook = () => {
       updateBook({
         id: id,
         title: title,
-        resume: resume,
+        description: description,
         author: author,
       })
     );
@@ -52,18 +52,18 @@ const UpdateBook = () => {
       </div>
       <div className="input-container ic2">
         <input
-          id="resume"
+          id="description"
           className="input"
           type="text"
           placeholder=" "
-          value={resume}
+          value={description}
           onChange={(e) => {
-            setResume(e.target.value);
+            setdescription(e.target.value);
           }}
         />
         <div className="cut" />
-        <label htmlFor="resume" className="placeholder">
-          Resume
+        <label htmlFor="description" className="placeholder">
+          description
         </label>
       </div>
       <div className="input-container ic2">

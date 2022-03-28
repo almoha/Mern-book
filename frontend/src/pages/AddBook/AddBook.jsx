@@ -12,7 +12,7 @@ const AddBook = () => {
   const booksList = useSelector((state) => state.booksReducer.books);
 
   const [title, setTitle] = useState('');
-  const [resume, setResume] = useState('');
+  const [description, setdescription] = useState('');
   const [author, setAuthor] = useState('');
 
   const handleSubmitButton = () => {
@@ -21,12 +21,12 @@ const AddBook = () => {
       addBook({
         id: idBookAdded,
         title,
-        resume,
+        description,
         author,
       })
     );
     setTitle('');
-    setResume('');
+    setdescription('');
     setAuthor('');
 
     navigate(`/detailsbook/${idBookAdded}`);
@@ -54,16 +54,16 @@ const AddBook = () => {
       </div>
       <div className="input-container ic2">
         <input
-          id="resume"
+          id="description"
           className="input"
           type="text"
           placeholder=" "
-          value={resume}
-          onChange={(e) => setResume(e.target.value)}
+          value={description}
+          onChange={(e) => setdescription(e.target.value)}
         />
         <div className="cut" />
-        <label htmlFor="resume" className="placeholder">
-          Resume
+        <label htmlFor="description" className="placeholder">
+          description
         </label>
       </div>
       <div className="input-container ic2">

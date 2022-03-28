@@ -12,7 +12,7 @@ const DetailsBook = () => {
   return (
     <div>
       <h1>{book.title}</h1>
-      <small>{book.resume}</small>
+      <small>{book.description}</small>
       <p>de {book.author}</p>
     </div>
   );

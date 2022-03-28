@@ -20,7 +20,7 @@ const ListBooks = () => {
 
   // const handleClickupdate = (id) => {
   //   dispatch(
-  //     updateBook({ id: id, title: 'Test', resume: 'test', author: 'test' })
+  //     updateBook({ id: id, title: 'Test', description: 'test', author: 'test' })
   //   );
   // };
 
@@ -36,7 +36,7 @@ const ListBooks = () => {
           <div key={book.id}>
             <p>{book.id}</p>
             <h3>{book.title}</h3>
-            <small>{book.resume}</small>
+            <small>{book.description}</small>
             <p>{book.author}</p>
 
             <Link to={`/detailsbook/${book.id}`}>
