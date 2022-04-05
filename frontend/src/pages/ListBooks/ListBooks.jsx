@@ -2,16 +2,22 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getBooks, detailsBook, deleteBook } from '../../features/BooksSlice';
+import {
+  // getBooks,
+  // detailsBook,
+  // deleteBook,
+  getAllBooks,
+  destroyBook,
+} from '../../features/BooksSlice';
 
 import './ListBooks.css';
 
 const ListBooks = () => {
-  const booksList = useSelector((state) => state.booksReducer.books);
+  const booksList = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
 
   const handleClickDelete = (id) => {
-    dispatch(deleteBook({ id: id }));
+    dispatch(destroyBook(id));
   };
 
   // const handleClickDetails = (id) => {
@@ -25,40 +31,39 @@ const ListBooks = () => {
   // };
 
   useEffect(() => {
-    // marche sans
-    dispatch(getBooks);
-  }, [booksList, dispatch]);
+    dispatch(getAllBooks());
+  }, [dispatch]);
 
   return (
     <div className="wrapper">
       {booksList.map((book) => {
         return (
-          <div key={book.id}>
-            <p>{book.id}</p>
+          <div key={book._id}>
+            <p>{book._id}</p>
             <h3>{book.title}</h3>
             <small>{book.description}</small>
             <p>{book.author}</p>
 
-            <Link to={`/detailsbook/${book.id}`}>
+            <Link to={`/detailsbook/${book._id}`}>
               <button
                 className="btn"
-                // onClick={() => handleClickDetails(book.id)}
+                // onClick={() => handleClickDetails(book._id)}
               >
                 View
               </button>
             </Link>
 
-            <Link to={`/updatebook/${book.id}`}>
+            <Link to={`/updatebook/${book._id}`}>
               <button className="btn">Update</button>
             </Link>
 
             {/* <button
               className="btn"
-              onClick={() => handleClickupdate(book.id, book)}
+              onClick={() => handleClickupdate(book._id, book)}
             >
               Update
             </button> */}
-            <button className="btn" onClick={() => handleClickDelete(book.id)}>
+            <button className="btn" onClick={() => handleClickDelete(book._id)}>
               x
             </button>
           </div>

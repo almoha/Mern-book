@@ -2,24 +2,25 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { addBook } from '../../features/BooksSlice';
+import { /*addBook,*/ createBook } from '../../features/BooksSlice';
 
 import './AddBook.css';
 
 const AddBook = () => {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const booksList = useSelector((state) => state.booksReducer.books);
+  const booksList = useSelector((state) => state.books.books);
 
   const [title, setTitle] = useState('');
   const [description, setdescription] = useState('');
   const [author, setAuthor] = useState('');
 
   const handleSubmitButton = () => {
-    const idBookAdded = booksList[booksList.length - 1].id + 1;
+    // const idBookAdded = booksList[booksList.length - 1].id + 1;
     dispatch(
-      addBook({
-        id: idBookAdded,
+      createBook({
+        // id: idBookAdded,
         title,
         description,
         author,
@@ -29,6 +30,8 @@ const AddBook = () => {
     setdescription('');
     setAuthor('');
 
+    const idBookAdded = booksList[booksList.length - 1]._id; // pb je récupére le livre avant celui inséré
+    console.log(idBookAdded);
     navigate(`/detailsbook/${idBookAdded}`);
   };
 

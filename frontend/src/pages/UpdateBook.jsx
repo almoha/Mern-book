@@ -7,27 +7,31 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { updateBook } from '../features/BooksSlice';
 
 const UpdateBook = () => {
-  const { id } = useParams();
-  const books = useSelector((state) => state.booksReducer.books);
-  const book = books.find((b) => b.id === parseInt(id));
-
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const books = useSelector((state) => state.books.books);
+  const book = books.find((b) => b._id === id);
+  // console.log(book);
+
   const navigate = useNavigate();
 
   const [title, setTitle] = useState(book.title);
-  const [description, setdescription] = useState(book.description);
+  const [description, setDescription] = useState(book.description);
   const [author, setAuthor] = useState(book.author);
 
   const handleSubmitButton = (id) => {
-    dispatch(
-      updateBook({
-        id: id,
-        title: title,
-        description: description,
-        author: author,
-      })
-    );
-    navigate(`/detailsbook/${id}`);
+    const bookUpdated = {
+      title: title,
+      description: description,
+      author: author,
+    };
+    console.log('client bookUpdated avantdispatch : ', bookUpdated);
+    console.log('client bookId avantdispatch : ', id);
+    dispatch(updateBook({ id, bookUpdated })); // ajout des {}
+    console.log('client bookUpdated après dispatch : ', bookUpdated);
+    console.log('useState : ', author);
+
+    // navigate(`/detailsbook/${id}`);
   };
 
   return (
@@ -58,7 +62,7 @@ const UpdateBook = () => {
           placeholder=" "
           value={description}
           onChange={(e) => {
-            setdescription(e.target.value);
+            setDescription(e.target.value);
           }}
         />
         <div className="cut" />
@@ -83,7 +87,7 @@ const UpdateBook = () => {
         </label>
       </div>
       <button
-        onClick={() => handleSubmitButton(book.id)}
+        onClick={() => handleSubmitButton(id)}
         type="text"
         className="submit"
       >

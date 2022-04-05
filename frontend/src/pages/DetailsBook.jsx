@@ -5,9 +5,9 @@ const DetailsBook = () => {
   // const book = useSelector((state) => state.booksReducer.books);
   const { id } = useParams();
 
-  const books = useSelector((state) => state.booksReducer.books);
+  const books = useSelector((state) => state.books.books);
 
-  const book = books.find((b) => b.id === parseInt(id));
+  const book = books.find((b) => b._id === id);
 
   return (
     <div>
