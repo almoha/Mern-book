@@ -36,13 +36,13 @@ const updateBook = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Book not found');
   }
-  const livre = {
-    title: 'la rage3',
-    description: 'desc la rage3',
-    author: 'sauvage jason3',
-  };
+  // const livre = {
+  //   title: 'la rage3',
+  //   description: 'desc la rage3',
+  //   author: 'sauvage jason3',
+  // };
   //findByIdAndUpdate(id, ...) is equivalent to findOneAndUpdate({ _id: id }, ...). So, really, findByIdAndUpdate() is just a convenient shorthand version for an update scenario that is likely to happen very often ("update by id")
-  const updatedBook = await Book.findByIdAndUpdate(req.params.id, livre, {
+  const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
     // test avec {title: 'zorro}=> l'update se fait
     new: true,
   });
