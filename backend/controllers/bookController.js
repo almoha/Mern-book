@@ -30,6 +30,10 @@ const createBook = asyncHandler(async (req, res) => {
 
 const updateBook = asyncHandler(async (req, res) => {
   console.log('backend bookController req body: ', req.body);
+  console.log(
+    'stringify - backend bookController req body: ',
+    JSON.stringify(req.body)
+  );
   const book = await Book.findById(req.params.id);
   console.log('original book : ', book);
   if (!book) {
@@ -44,7 +48,7 @@ const updateBook = asyncHandler(async (req, res) => {
   //findByIdAndUpdate(id, ...) is equivalent to findOneAndUpdate({ _id: id }, ...). So, really, findByIdAndUpdate() is just a convenient shorthand version for an update scenario that is likely to happen very often ("update by id")
   const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
     // test avec {title: 'zorro}=> l'update se fait
-    new: true,
+    new: true, //pour retourner le livre modifié
   });
 
   console.log('updated book : ', updatedBook);
@@ -60,7 +64,7 @@ const deleteBook = asyncHandler(async (req, res) => {
 
   await book.deleteOne({ _id: req.params.id }); // fonction remove() dépréciée
 
-  res.status(200).json({ id: req.params.id }); // renvoie l'id, utile pour le frontend
+  res.status(200).json({ _id: req.params.id }); // renvoie l'id, utile pour le frontend
 });
 
 module.exports = {

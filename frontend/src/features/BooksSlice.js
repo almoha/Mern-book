@@ -153,8 +153,9 @@ export const BooksSlice = createSlice({
       .addCase(updateBook.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.message = action.payload;
         state.books = state.books.map(
-          (book) => (book._id === action.payload.id ? action.payload : book) //the payload contient le book updated; sinon le book si pas de modification
+          (book) => (book._id === action.payload._id ? action.payload : book) //the payload contient le book updated; sinon le book si pas de modification
         );
       })
       .addCase(updateBook.rejected, (state, action) => {
@@ -170,7 +171,7 @@ export const BooksSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.books = state.books.filter(
-          (book) => book._id !== action.payload.id // la fonction delete backend renvoie l'id du livre supprimé (id contenu dans action.payload.id )
+          (book) => book._id !== action.payload._id // la fonction delete backend renvoie l'id du livre supprimé (id contenu dans action.payload.id )
         );
       })
       .addCase(destroyBook.rejected, (state, action) => {
