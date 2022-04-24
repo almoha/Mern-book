@@ -4,6 +4,7 @@ import bookService from './bookService';
 
 const initialState = {
   books: [],
+  book: '',
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -36,6 +37,24 @@ export const getAllBooks = createAsyncThunk(
   async (thunkAPI) => {
     try {
       return await bookService.getBooks();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get détail book
+export const getOneBook = createAsyncThunk(
+  'book/getOne',
+  async (id, thunkAPI) => {
+    try {
+      return await bookService.getOneBook(id);
     } catch (error) {
       const message =
         (error.response &&
@@ -146,6 +165,19 @@ export const BooksSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(getOneBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOneBook.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.book = action.payload;
+      })
+      .addCase(getOneBook.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
 
       .addCase(updateBook.pending, (state) => {
         state.isLoading = true;
@@ -157,6 +189,7 @@ export const BooksSlice = createSlice({
         state.books = state.books.map(
           (book) => (book._id === action.payload._id ? action.payload : book) //the payload contient le book updated; sinon le book si pas de modification
         );
+        state.book = action.payload;
       })
       .addCase(updateBook.rejected, (state, action) => {
         state.isLoading = false;

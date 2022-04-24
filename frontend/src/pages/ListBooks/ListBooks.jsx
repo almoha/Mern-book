@@ -20,6 +20,12 @@ const ListBooks = () => {
     dispatch(destroyBook(id));
   };
 
+  // const handleClickDetail = (id) => {
+  //   console.log('ok');
+  //   dispatch(getOneBook(id));
+  //   navigate(`detailsbook/${id}`);
+  // };
+
   // const handleClickDetails = (id) => {
   //   dispatch(detailsBook({ id: id }));
   // };
@@ -45,12 +51,7 @@ const ListBooks = () => {
             <p>{book.author}</p>
 
             <Link to={`/detailsbook/${book._id}`}>
-              <button
-                className="btn"
-                // onClick={() => handleClickDetails(book._id)}
-              >
-                View
-              </button>
+              <button className="btn">View</button>
             </Link>
 
             <Link to={`/updatebook/${book._id}`}>

@@ -1,14 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { getOneBook } from '../features/BooksSlice';
+
 const DetailsBook = () => {
-  // const book = useSelector((state) => state.booksReducer.books);
+  const dispatch = useDispatch();
   const { id } = useParams();
+  const book = useSelector((state) => state.books.book);
+  // const book = books.find((b) => b._id === id);
 
-  const books = useSelector((state) => state.books.books);
-
-  const book = books.find((b) => b._id === id);
+  useEffect(() => {
+    dispatch(getOneBook(id));
+  }, [id, dispatch]);
 
   return (
     <div>

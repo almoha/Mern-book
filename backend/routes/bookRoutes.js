@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const {
   getBooks,
+  getDetailBook,
   createBook,
   updateBook,
   deleteBook,
 } = require('../controllers/bookController');
 
-const bookController = require('../controllers/bookController');
-
 router.get('/', getBooks);
+
+router.get('/:id', getDetailBook);
 
 router.post('/', createBook);
 

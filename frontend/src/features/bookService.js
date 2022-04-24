@@ -19,6 +19,13 @@ const getBooks = async () => {
   return response.data;
 };
 
+// Get détail book
+const getOneBook = async (bookId) => {
+  const response = await axios.get(API_URL + bookId);
+
+  return response.data;
+};
+
 // Update user book
 const updateBook = async (bookId, bookData) => {
   console.log('axios service bookId: ', bookId);
@@ -37,6 +44,7 @@ const deleteBook = async (bookId) => {
 
 const bookService = {
   getBooks,
+  getOneBook,
   addBook,
   deleteBook,
   updateBook,

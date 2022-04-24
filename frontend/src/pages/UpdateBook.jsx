@@ -25,6 +25,9 @@ const UpdateBook = () => {
     if (book) setBookData(book);
   }, [book, dispatch]);
 
+  // if (book == 'undefined') {
+  //   navigate('/');
+  // }
   const clear = () => {
     setBookData({ title: '', description: '', author: '' });
   };

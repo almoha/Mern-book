@@ -11,6 +11,12 @@ const getBooks = asyncHandler(async (req, res) => {
   res.status(200).json(books);
 });
 
+const getDetailBook = asyncHandler(async (req, res) => {
+  const book = await Book.findById(req.params.id);
+
+  res.status(200).json(book);
+});
+
 const createBook = asyncHandler(async (req, res) => {
   console.log('backend bookController req body create: ', req.body);
   if (!req.body.title) {
@@ -69,6 +75,7 @@ const deleteBook = asyncHandler(async (req, res) => {
 
 module.exports = {
   getBooks,
+  getDetailBook,
   createBook,
   updateBook,
   deleteBook,
